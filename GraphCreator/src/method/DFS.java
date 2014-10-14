@@ -7,40 +7,37 @@ import java.util.*;
 
 public class DFS {
 
-    private String methodName;
     private Graph graph;
-
-    Set<Vertex> set = new TreeSet<Vertex>();
-    static Map<Vertex, Mark> visitedMap;
-    int counter = 0;
+    // map посещаемых вершин
+    static Map<Vertex, Mark> visitedMap = new LinkedHashMap<Vertex, Mark>();
+    private int counter;
 
     public DFS() {
-        methodName = "DFS";
-        visitedMap = new LinkedHashMap<Vertex, Mark>();
     }
 
     public void dfs(Vertex vertex) {
         if (visitedMap.containsKey(vertex)) return;
 
-        visitedMap.put(vertex, new Mark(counter, -1));
-        counter++;
+        // добовляем время входа в вершину - pre
+        visitedMap.put(vertex, new Mark(counter++, -1));
 
-        Set<Vertex> adjacentVertices = vertex.getIncidentVertices();
-
-        for (Vertex v : adjacentVertices) {
+        for (Vertex v : vertex.getIncidentVertices()) {
             if (visitedMap.containsKey(v)) continue;
             dfs(v);
         }
 
+        // время выхода - post
         Mark m = visitedMap.get(vertex);
         m.post = counter++;
     }
 
     public void print(){
-        set.clear();
         visitedMap.clear();
         counter = 1;
 
+
+        // сортируем вершины
+        Set<Vertex> set = new TreeSet<Vertex>();
         for (Vertex vertex : graph.getVertices()) {
             set.add(vertex);
         }
@@ -49,7 +46,7 @@ public class DFS {
             dfs(v);
         }
 
-        System.out.println(methodName);
+        System.out.println("\nDFS");
         for (Map.Entry<Vertex, Mark> entry : visitedMap.entrySet()) {
             Mark m = entry.getValue();
             System.out.format("%1$s : (%2$d, %3$d)\n", entry.getKey(), m.pre, m.post);
@@ -61,11 +58,12 @@ public class DFS {
     }
 
     static class Mark {
+        public int pre;
+        public int post;
+
         public Mark(int pre, int post) {
             this.pre  = pre;
             this.post = post;
         }
-        public int pre;
-        public int post;
-    };
+    }
 }

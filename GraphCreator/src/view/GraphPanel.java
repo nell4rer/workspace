@@ -135,6 +135,9 @@ public class GraphPanel extends JInternalFrame implements MouseMotionListener, M
                     graphics.fillOval(this.position.get(vertex2).x - 7, this.position.get(vertex2).y - 7, 14, 14);
                     graphics.setColor(Color.red);
 
+                    Font stringFont = new Font( "SansSerif", Font.PLAIN, 18 );
+                    graphics.setFont( stringFont );
+                    graphics.drawString(vertex2.toString(),this.position.get(vertex2).x - 7, this.position.get(vertex2).y - 7);
                 }
             }
         }
@@ -181,6 +184,10 @@ public class GraphPanel extends JInternalFrame implements MouseMotionListener, M
             if (vertex != this.vertexToDelete) {
                 //graphics.setColor(Color.red);
                 graphics.fillOval(this.position.get(vertex).x - 4, this.position.get(vertex).y - 4, 8, 8);
+
+                Font stringFont = new Font( "SansSerif", Font.PLAIN, 18 );
+                graphics.setFont( stringFont );
+                graphics.drawString(vertex.toString(),this.position.get(vertex).x - 7, this.position.get(vertex).y - 7);
             }
         }
 
@@ -199,6 +206,7 @@ public class GraphPanel extends JInternalFrame implements MouseMotionListener, M
         }
 
         bfs.getGraph(graph);
+        dfs.getGraph(graph);
     }
 
     /**

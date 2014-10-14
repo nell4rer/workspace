@@ -8,31 +8,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
-public class GraphMain extends JFrame {
+public class GraphMain extends JFrame{
 
     private JMenuBar menuBar;
     private JPanel graphPanel;
 
-    public GraphMain() {
+    // размер фрейма
+    public static int xSizeWindow = 800;
+    public static int ySizeWindow = 600;
+
+    public GraphMain(){
         super("Graphs redactor");
         initialize();
         addComponents();
     }
 
-    private void initialize() {
+    private void initialize(){
         setLayout(new BorderLayout());
-        setSize(800, 600);
-        setPreferredSize(new Dimension(800, 600));
+        setSize(xSizeWindow, ySizeWindow);
+        setPreferredSize(new Dimension(xSizeWindow, ySizeWindow));
         //setMinimumSize(new Dimension(800, 600));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void addPanel(GraphPanel panel) {
+    public void addPanel (GraphPanel panel) {
         graphPanel.add(panel);
         repaint();
     }
 
-    private void addComponents() {
+    private void addComponents(){
         addMainPanel();
         addDefaultGraphPanel();
         addMainMenu();
@@ -44,14 +48,8 @@ public class GraphMain extends JFrame {
         graphPanel = new JPanel();
         JScrollPane scrollPane = new JScrollPane(graphPanel);
         add(scrollPane, BorderLayout.CENTER);
-        //JScrollPane scrollPane = new JScrollPane(graphPanel);
-        //add(scrollPane, BorderLayout.CENTER);
-        //graphPanel = new GraphPanel("First");
-        //setContentPane(graphPanel);
-        //add(graphPanel);
     }
-
-    private void addDefaultGraphPanel() {
+    private void addDefaultGraphPanel () {
         graphPanel.add(new GraphPanel("12345"), BorderLayout.CENTER);
     }
 
@@ -84,6 +82,8 @@ public class GraphMain extends JFrame {
             }
         });
 
+
+
         JMenuItem dfs = new JMenuItem("DFS");
         solutionMenu.add(dfs);
 
@@ -100,5 +100,4 @@ public class GraphMain extends JFrame {
 
         repaint();
     }
-
 }
