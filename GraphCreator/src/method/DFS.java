@@ -12,9 +12,6 @@ public class DFS {
     static Map<Vertex, Mark> visitedMap = new LinkedHashMap<Vertex, Mark>();
     private int counter;
 
-    public DFS() {
-    }
-
     public void dfs(Vertex vertex) {
         if (visitedMap.containsKey(vertex)) return;
 
